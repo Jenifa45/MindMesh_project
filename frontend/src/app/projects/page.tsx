@@ -11,7 +11,6 @@ import {
 } from "@/lib/api";
 import { createClient } from "@/lib/client";
 import { useRouter } from "next/navigation";
-import { BottleWineIcon } from "lucide-react";
 
 const supabase = createClient();
 

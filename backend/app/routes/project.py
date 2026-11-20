@@ -13,7 +13,7 @@ load_dotenv()
 router = APIRouter(prefix="/projects", tags=["Projects"])
 
 SUPABASE_URL = os.environ["SUPABASE_URL"].rstrip("/")
-SUPABASE_ANON_KEY = os.environ["SUPABASE_ANON_KEY"]
+SUPABASE_PUBLISHABLE_KEY = os.environ["SUPABASE_PUBLISHABLE_KEY"]
 PROJECTS_URL = f"{SUPABASE_URL}/rest/v1/projects"
 
 
@@ -24,7 +24,7 @@ async def db_request(
     body: dict | None = None,
 ):
     headers = {
-        "apikey": SUPABASE_ANON_KEY,
+        "apikey": SUPABASE_PUBLISHABLE_KEY,
         "Authorization": f"Bearer {user['access_token']}",
         "Content-Type": "application/json",
     }

@@ -11,38 +11,34 @@ export default function DashboardPage() {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
+  const [apiError, setApiError] = useState("");
 
   useEffect(() => {
     async function getUser() {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
 
-      if (!user) {
-        router.replace("/login");
-        return;
+        if (!user) {
+          router.replace("/login");
+          return;
+        }
+
+        setEmail(user.email ?? "");
+
+        const response = await apiFetch("/me");
+
+        if (!response.ok) {
+          throw new Error(`FastAPI authentication failed: ${response.status}`);
+        }
+
+        await response.json();
+      } catch (error) {
+        setApiError(
+          error instanceof Error ? error.message : "Unable to load your account."
+        );
       }
-
-      setEmail(user.email ?? "");
-
-      // Get JWT access token
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      console.log("JWT TOKEN:", session?.access_token);
-
-      // Send JWT token to FastAPI
-      const response = await apiFetch("/me");
-
-      if (!response.ok) {
-        console.error("FastAPI authentication failed:", response.status);
-        return;
-      }
-
-      const data = await response.json();
-
-      console.log("FastAPI response:", data);
     }
 
     getUser();
@@ -102,6 +98,12 @@ export default function DashboardPage() {
           <p className="text-sm font-bold uppercase tracking-wide text-indigo-600">
             Workspace
           </p>
+
+          {apiError && (
+            <p role="alert" className="mt-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
+              {apiError} Make sure the backend is running.
+            </p>
+          )}
 
           <h1 className="mt-2 text-4xl font-bold tracking-tight text-slate-950">
             Good to see you again.

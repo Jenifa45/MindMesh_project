@@ -1,6 +1,7 @@
 {
-  "python.defaultInterpreterPath": "${workspaceFolder}/backend/.venv/Scripts/python.exe",
+  "python.defaultInterpreterPath": "${workspaceFolder}/Mind-Mesh-project/backend/.venv/Scripts/python.exe",
   "python.analysis.extraPaths": [
-    "${workspaceFolder}/backend"
-  ]
+    "${workspaceFolder}/Mind-Mesh-project/backend"
+],
+"python.terminal.useEnvFile": true
 }

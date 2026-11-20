@@ -7,7 +7,7 @@ A collaborative AI workspace combining project management, document-aware chat, 
 ## Table of Contents
 
 - [Git Commands](#git-commands)
-- [Frontend Setup](#frontend-setup)
+- [Run the application](#run-the-application)
 - [Backend Setup](#backend-setup)
 
 ---
@@ -16,7 +16,7 @@ A collaborative AI workspace combining project management, document-aware chat, 
 
 | Step | Purpose | Command |
 |------|---------|---------|
-| 1 | Clone the repository | `git clone https://github.com/Jenifa45/MindMesh_project.git` |
+| 1 | Clone the repository | `git clone https://github.com/Jenifa02/Mind-Mesh-project.git` |
 | 2 | Add changes | `git add .` |
 | 3 | Commit changes | `git commit -m "your changes"` |
 | 4 | Push to your branch | `git push origin <your-branch>` |
@@ -63,14 +63,14 @@ npx create-next-app@latest frontend --ts --tailwind --app --eslint --use-npm
 | `--eslint` | Enables **ESLint** for code quality and error checking |
 | `--use-npm` | Uses **npm** as the package manager |
 
-### 3. Run the frontend
+## Run the application
 
 ```bash
-cd frontend
+npm install
 npm run dev
 ```
 
-The app runs at `http://localhost:3000`.
+Run these commands from the project root. They start both the frontend at `http://localhost:3000` and the backend API at `http://localhost:8000`.
 
 ---
 
@@ -109,7 +109,7 @@ pip freeze > requirements.txt
 ### 4. Run the FastAPI application
 
 ```powershell
-uvicorn app.main:app --reload
+uvicorn app.main:app --reload --port 8000
 ```
 
 **Purpose:** Starts the FastAPI application locally using Uvicorn. The API docs are available at `http://127.0.0.1:8000/docs`.
